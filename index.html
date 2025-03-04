@@ -273,14 +273,19 @@
             color: var(--light-gray);
         }
 
-        .brands-grid {
+        .brands-section {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
         
+        .brands-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
         .brand-item {
-            text-align: center;
             padding: 1.5rem 0.8rem;
             background-color: rgba(0, 0, 0, 0.03);
             border-radius: var(--border-radius);
@@ -291,9 +296,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
             color: var(--text-color);
             text-decoration: none;
+            margin-bottom: 15px;
         }
         
         .dark-theme .brand-item {
@@ -318,6 +323,7 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease;
+            margin: 0 auto 15px auto;
         }
         
         .brand-item:hover .brand-logo {
@@ -355,10 +361,16 @@
             font-size: 0.9rem;
             transition: color 0.3s ease;
             font-weight: 500;
+            margin-bottom: 10px;
+            text-align: center;
         }
         
         .brand-item:hover .brand-name {
             color: var(--accent-color);
+        }
+
+        .brand-content {
+            width: 100%;
         }
 
         .contact-grid {
@@ -511,7 +523,7 @@
             color: var(--light-gray);
             font-size: 0.9rem;
             margin-top: 0.5rem;
-            text-align: center;
+            text-align: left;
         }
         
         .title-bar {
@@ -529,7 +541,7 @@
         }
         
         .brand-visit {
-            margin-top: auto;
+            margin-top: 15px;
             width: 100%;
             padding: 0.5rem;
             background-color: var(--accent-color);
@@ -584,8 +596,8 @@
             <div class="logo-container">
                 <div class="logo">
                     <!-- CurioVerge logo - changes based on theme -->
-                    <img src="brands/CV Black.svg" alt="CurioVerge Logo Light" class="brand-svg">
-                    <img src="brands/CV White.svg" alt="CurioVerge Logo Dark" class="brand-svg">
+                    <img src="brands/CV Black.svg" alt="CurioVerge Logo Light" class="brand-svg light-logo">
+                    <img src="brands/CV White.svg" alt="CurioVerge Logo Dark" class="brand-svg dark-logo">
                 </div>
                 <div class="header-text">
                     <h1>CurioVerge</h1>
@@ -627,42 +639,59 @@
                     <span class="tag">explore</span>
                 </div>
                 <div class="brands-grid">
+                    <!-- Vision'97 Brand Section -->
+                    <div class="section brand-item">
                         <div class="brand-logo">
                             <img src="brands/Asset 5.svg" alt="Vision'97 Logo" class="brand-svg">
                         </div>
-                        <div class="brand-name">Vision'97</div>
-                        <div class="brand-description">this is more than a streetwear brand; it’s a movement rooted in purpose and clarity. Inspired by the belief that anyone can overcome their circumstances through focus and determination, Vision’97 reminds us that the future’s clear when you know where you’re going and why
-</div>
-                        <div class="social-links">
-                            <a href="https://instagram.com/vision97.vision" target="_blank" class="social-link">IG</a>
-                            <a href="https://twitter.com/vision97_origin" target="_blank" class="social-link">TW</a>
+                        <div class="brand-content">
+                            <div class="brand-name">Vision'97</div>
+                            <div class="brand-description">This is more than a streetwear brand; it's a movement rooted in purpose and clarity. Inspired by the belief that anyone can overcome their circumstances through focus and determination, Vision'97 reminds us that the future's clear when you know where you're going and why.</div>
+                            <div class="social-links">
+                                <a href="https://instagram.com/vision97.vision" target="_blank" class="social-link">IG</a>
+                                <a href="https://twitter.com/vision97_origin" target="_blank" class="social-link">TW</a>
+                            </div>
+                            <a href="https://vision97.vision" target="_blank">
+                                <div class="brand-visit">Visit Brand</div>
+                            </a>
                         </div>
-                        <a href="https://vision97.vision" target="_blank"> <div class="brand-visit">Visit Brand</div> </a>
-                    </a>
+                    </div>
                     
+                    <!-- CurioGfxYard Brand Section -->
+                    <div class="section brand-item">
                         <div class="brand-logo">
                             <img src="brands/Asset 1.svg" alt="CurioGfxYard Logo" class="brand-svg">
                         </div>
-                        <div class="brand-name">CurioGfxYard</div>
-                        <div class="brand-description">Creative design studio specializing in branding and visual identity</div>
-                        <div class="social-links">
-                            <a href="https://instagram.com/curiogfxyard" target="_blank" class="social-link">IG</a>
-                            <a href="https://twitter.com/curiogfxyard" target="_blank" class="social-link">TW</a>
+                        <div class="brand-content">
+                            <div class="brand-name">CurioGfxYard</div>
+                            <div class="brand-description">Creative design studio specializing in branding and visual identity.</div>
+                            <div class="social-links">
+                                <a href="https://instagram.com/curiogfxyard" target="_blank" class="social-link">IG</a>
+                                <a href="https://twitter.com/curiogfxyard" target="_blank" class="social-link">TW</a>
+                            </div>
+                            <a href="https://curiogfxyard.work" target="_blank">
+                                <div class="brand-visit">Visit Brand</div>
+                            </a>
                         </div>
-                        <a href="https://curiogfxyard.work" target="_blank"> <div class="brand-visit">Visit Brand</div> </a>
-                    </a>
+                    </div>
 
+                    <!-- CurioLabs Brand Section -->
+                    <div class="section brand-item">
                         <div class="brand-logo">
                             <img src="brands/3.svg" alt="CurioLabs Logo" class="brand-svg">
                         </div>
-                        <div class="brand-name">CurioLabs</div>
-                        <div class="brand-description">Digital platform focused on innovative web experiences and experimental products</div>
-                        <div class="social-links">
-                            <a href="https://instagram.com/curiolabs" target="_blank" class="social-link">IG</a>
-                            <a href="https://twitter.com/curiolabs" target="_blank" class="social-link">TW</a>
+                        <div class="brand-content">
+                            <div class="brand-name">CurioLabs</div>
+                            <div class="brand-description">Digital platform focused on innovative web experiences and experimental products.</div>
+                            <div class="social-links">
+                                <a href="https://instagram.com/curiolabs" target="_blank" class="social-link">IG</a>
+                                <a href="https://twitter.com/curiolabs" target="_blank" class="social-link">TW</a>
+                            </div>
+                            <a href="https://curiolabs.dev" target="_blank">
+                                <div class="brand-visit">Visit Brand</div>
+                            </a>
                         </div>
-                        <a href="https://curiolabs.dev" target="_blank"> <div class="brand-visit">Visit Brand</div> </a>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
