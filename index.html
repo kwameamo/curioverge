@@ -1,1 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CurioVerge</title>
+    <style>
+        :root {
+            --text-color: #1a1a1a;
+            --bg-color: #f8f9fa;
+            --accent-color: #4361ee;
+            --accent-color-hover: #3a56d4;
+            --light-gray: #666;
+            --section-bg: rgba(255, 255, 255, 0.7);
+            --section-border: rgba(0, 0, 0, 0.05);
+            --section-shadow: rgba(0, 0, 0, 0.05);
+            --button-text: #ffffff;
+            --highlight: #4cc9f0;
+            --error: #ef476f;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --transition-speed: 0.3s;
+            --border-radius: 8px;
+        }
 
+        body.dark-theme {
+            --text-color: #e9ecef;
+            --bg-color: #121212;
+            --accent-color: #4cc9f0;
+            --accent-color-hover: #7ad5f5;
+            --light-gray: #adb5bd;
+            --section-bg: rgba(255, 255, 255, 0.03);
+            --section-border: rgba(255, 255, 255, 0.1);
+            --section-shadow: rgba(0, 0, 0, 0.2);
+            --button-text: #000000;
+            --highlight: #4361ee;
+            --error: #ef476f;
+            --success: #06d6a0;
+            --warning: #ffd166;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 19px;
+            font-style: normal;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(67, 97, 238, 0.05) 0%, rgba(0,0,0,0) 50%),
+                radial-gradient(circle at 70% 80%, rgba(76, 201, 240, 0.03) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0.7;
+        }
+        
+        body.dark-theme::before {
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(76, 201, 240, 0.03) 0%, rgba(0,0,0,0) 50%),
+                radial-gradient(circle at 70% 80%, rgba(67, 97, 238, 0.02) 0%, rgba(0,0,0,0) 50%);
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: 
+                linear-gradient(var(--section-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--section-border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+        }
+
+        h1, h2, h3 {
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 19px;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        /* Custom cursor */
+        @media (min-width: 768px) {
+            body {
+                cursor: none;
+            }
+            
+            .cursor {
+                width: 20px;
+                height: 20px;
+                border: 1px solid var(--accent-color);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: difference;
+                transition: transform 0.2s ease;
+            }
+            
+            .cursor-dot {
+                width: 4px;
+                height: 4px;
+                background-color: var(--accent-color);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: width 0.2s ease, height 0.2s ease;
+            }
+            
+            a, button, .theme-btn, .brand-item, .contact-item {
+                cursor: none;
+            }
+        }
+
+        .section {
+            margin-bottom: 10px;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            background-color: var(--section-bg);
+            border: 1px solid var(--section-border);
+            transition: border 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 4px var(--section-shadow);
+        }
+        
+        .section:hover {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 0;
+            border: 1px solid var(--section-border);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            margin-bottom: 1rem;
+        }
+        
+        .section-footer {
+            margin-top: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--section-bg);
+            border: 1px solid var(--section-border);
+            padding: 0.5rem;
+        }
+        
+        .logo-svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .header-text h1 {
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        
+        .header-slogan {
+            color: var(--light-gray);
+            font-size: 11px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .about-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .section.theme-section {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 1.5rem;
+            min-height: 120px;
+        }
+        
+        .slogan {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        .about-text {
+            color: var(--light-gray);
+            line-height: 1.6;
+            position: relative;
+            margin: 1rem 0;
+            padding-left: 0;
+            text-align: left;
+        }
+
+        .label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--light-gray);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .brand-item {
+            text-align: center;
+            padding: 1.5rem 0.8rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: var(--border-radius);
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        .dark-theme .brand-item {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        
+        .brand-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-theme .brand-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .brand-item:hover .brand-logo {
+            transform: scale(1.1);
+        }
+        
+        .brand-svg {
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-theme .brand-svg {
+            stroke: var(--accent-color);
+            fill: var(--accent-color);
+        }
+        
+        .brand-name {
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .brand-item:hover .brand-name {
+            color: var(--accent-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dark-theme .contact-item {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .contact-item:hover {
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            display: flex;
+            width: 100%;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 50px;
+            height: 40px;
+            padding: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .dark-theme .theme-toggle {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .theme-btn {
+            flex: 1;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            padding: 0 10px;
+            white-space: nowrap;
+        }
+
+        .theme-btn::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:nth-child(1)::before {
+            background: radial-gradient(circle, #ffdd00 30%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .theme-btn:nth-child(2)::before {
+            background: radial-gradient(circle, #aaa 30%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .theme-btn.active {
+            color: var(--button-text);
+        }
+        
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 50%;
+            height: calc(100% - 6px);
+            background-color: var(--accent-color);
+            border-radius: 50px;
+            transition: transform 0.3s ease;
+            z-index: 0;
+        }
+        
+        .dark-theme .theme-toggle::after {
+            transform: translateX(100%);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            justify-content: center;
+        }
+
+        .social-link {
+            padding: 0.4rem;
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, 0.03);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 30px;
+        }
+
+        .dark-theme .social-link {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--button-text);
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: background-color var(--transition-speed);
+            margin-top: 0.5rem;
+        }
+
+        .button:hover {
+            background-color: var(--accent-color-hover);
+        }
+
+        .brand-description {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid var(--section-border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-name {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .brand-visit {
+            margin-top: auto;
+            width: 100%;
+            padding: 0.5rem;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .brand-visit:hover {
+            background-color: var(--accent-color-hover);
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--light-gray);
+            font-size: 0.8rem;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor elements -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    
+    <!-- Main container -->
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <!-- Placeholder for CurioVerge logo - using a creative "CV" design -->
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="none"/>
+                        <path d="M30,20 C18,20 10,30 10,50 C10,70 18,80 30,80 C38,80 45,75 47,65" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                        <path d="M50,20 L70,80 M90,20 L70,80" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                    </svg>
+                </div>
+                <div class="header-text">
+                    <h1>CurioVerge</h1>
+                    <span class="header-slogan">uniting creativity and innovation</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="sidebar">
+                <div class="section about-section">
+                    <div class="title-bar">
+                        <span class="section-name">about</span>
+                        <span class="tag">est. 2020</span>
+                    </div>
+                    <p class="about-text">CurioVerge is the umbrella company that unites Vision'97, CurioGfxYard, and CurioLabs under a common vision of creativity, innovation, and design excellence.</p>
+                    <div class="social-links">
+                        <a href="mailto:hello@curioverge.com" class="social-link">@</a>
+                        <a href="https://instagram.com/curioverge" target="_blank" class="social-link">IG</a>
+                        <a href="https://twitter.com/curioverge" target="_blank" class="social-link">TW</a>
+                        <a href="https://linkedin.com/company/curioverge" target="_blank" class="social-link">LI</a>
+                    </div>
+                </div>
+                
+                <div class="section theme-section">
+                    <div class="title-bar">
+                        <span class="section-name">theme</span>
+                    </div>
+                    <div class="theme-toggle">
+                        <div class="theme-btn active" onclick="setTheme('light')">light</div>
+                        <div class="theme-btn" onclick="setTheme('dark')">dark</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section brands-section">
+                <div class="title-bar">
+                    <span class="section-name">our brands</span>
+                    <span class="tag">explore</span>
+                </div>
+                <div class="brands-grid">
+                    <a href="https://vision97.vision" target="_blank" class="brand-item">
+                        <div class="brand-logo">
+                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Vision'97 Logo - Simple V shape -->
+                                <path d="M20,20 L50,80 L80,20" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                                <text x="35" y="65" font-size="12" fill="var(--accent-color)">97</text>
+                            </svg>
+                        </div>
+                        <div class="brand-name">Vision'97</div>
+                        <div class="brand-description">Innovative streetwear with cultural perspective and conscious design</div>
+                        <div class="social-links">
+                            <a href="https://instagram.com/vision97brand" target="_blank" class="social-link">IG</a>
+                            <a href="https://twitter.com/vision97brand" target="_blank" class="social-link">TW</a>
+                        </div>
+                        <div class="brand-visit">Visit Brand</div>
+                    </a>
+                    <a href="https://curiogfxyard.work" target="_blank" class="brand-item">
+                        <div class="brand-logo">
+                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- CurioGfxYard Logo - C with a stylized G -->
+                                <path d="M30,25 C20,25 15,35 15,50 C15,65 20,75 30,75 C40,75 45,65 45,50" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                                <path d="M60,40 L85,40 M85,40 L70,60 M70,60 L85,60" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="brand-name">CurioGfxYard</div>
+                        <div class="brand-description">Creative design studio specializing in branding and visual identity</div>
+                        <div class="social-links">
+                            <a href="https://instagram.com/curiogfxyard" target="_blank" class="social-link">IG</a>
+                            <a href="https://twitter.com/curiogfxyard" target="_blank" class="social-link">TW</a>
+                        </div>
+                        <div class="brand-visit">Visit Brand</div>
+                    </a>
+                    <a href="https://curiolabs.dev" target="_blank" class="brand-item">
+                        <div class="brand-logo">
+                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- CurioLabs Logo - Lab flask with circular bubble -->
+                                <path d="M40,20 L40,50 L30,75 L70,75 L60,50 L60,20 Z" stroke="var(--accent-color)" stroke-width="3" fill="none"/>
+                                <circle cx="65" cy="35" r="10" stroke="var(--accent-color)" stroke-width="3" fill="none"/>
+                                <circle cx="65" cy="35" r="3" fill="var(--accent-color)"/>
+                            </svg>
+                        </div>
+                        <div class="brand-name">CurioLabs</div>
+                        <div class="brand-description">Digital platform focused on innovative web experiences and experimental products</div>
+                        <div class="social-links">
+                            <a href="https://instagram.com/curiolabs" target="_blank" class="social-link">IG</a>
+                            <a href="https://twitter.com/curiolabs" target="_blank" class="social-link">TW</a>
+                        </div>
+                        <div class="brand-visit">Visit Brand</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            © 2025 CurioVerge • All Rights Reserved
+        </div>
+    </div>
+
+    <script>
+        // Theme toggling function
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.theme-btn')[1].classList.add('active');
+            } else {
+                document.body.classList.remove('dark-theme');
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelectorAll('.theme-btn')[0].classList.add('active');
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        // Custom cursor functionality
+        function initCustomCursor() {
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            
+            if (!cursor || !cursorDot || window.matchMedia('(max-width: 767px)').matches) return;
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
+            
+            // Scale effect for interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .theme-btn, .brand-item, .contact-item');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorDot.style.width = '8px';
+                    cursorDot.style.height = '8px';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorDot.style.width = '4px';
+                    cursorDot.style.height = '4px';
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Use dark theme if user's system prefers dark mode
+                setTheme('dark');
+            }
+            
+            // Initialize custom cursor
+            initCustomCursor();
+        });
+    </script>
+</body>
+</html>
