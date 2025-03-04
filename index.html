@@ -333,8 +333,24 @@
         }
         
         .dark-theme .brand-svg {
-            stroke: var(--accent-color);
-            fill: var(--accent-color);
+            fill: var(--text-color);
+        }
+        
+        /* Logo display based on theme */
+        .light-logo {
+            display: block;
+        }
+        
+        .dark-logo {
+            display: none;
+        }
+        
+        .dark-theme .light-logo {
+            display: none;
+        }
+        
+        .dark-theme .dark-logo {
+            display: block;
         }
         
         .brand-name {
@@ -573,11 +589,18 @@
         <div class="header">
             <div class="logo-container">
                 <div class="logo">
-                    <!-- Placeholder for CurioVerge logo - using a creative "CV" design -->
-                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100" height="100" fill="none"/>
-                        <path d="M30,20 C18,20 10,30 10,50 C10,70 18,80 30,80 C38,80 45,75 47,65" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
-                        <path d="M50,20 L70,80 M90,20 L70,80" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                    <!-- CurioVerge logo - changes based on theme -->
+                    <svg class="logo-svg light-logo" viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M76.1,135.3c-18.5,0-30.9,16-30.9,47.1c0,31.1,12.4,47.1,30.9,47.1c12.2,0,23-9.6,26.1-28.3h-13.3
+                        c-2.3,11.2-6.4,16.5-12.8,16.5c-10.6,0-17.2-11.1-17.2-35.3c0-24.2,6.6-35.3,17.2-35.3c6.3,0,10.4,5.2,12.8,16.5h13.3
+                        C99.1,144.9,88.3,135.3,76.1,135.3z" fill="var(--text-color)"/>
+                        <polygon points="220.3,135.3 239.8,227.7 259.3,135.3 273.9,135.3 246.7,229.5 232.9,229.5 205.7,135.3" fill="var(--text-color)"/>
+                    </svg>
+                    <svg class="logo-svg dark-logo" viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M76.1,135.3c-18.5,0-30.9,16-30.9,47.1c0,31.1,12.4,47.1,30.9,47.1c12.2,0,23-9.6,26.1-28.3h-13.3
+                        c-2.3,11.2-6.4,16.5-12.8,16.5c-10.6,0-17.2-11.1-17.2-35.3c0-24.2,6.6-35.3,17.2-35.3c6.3,0,10.4,5.2,12.8,16.5h13.3
+                        C99.1,144.9,88.3,135.3,76.1,135.3z" fill="var(--text-color)"/>
+                        <polygon points="220.3,135.3 239.8,227.7 259.3,135.3 273.9,135.3 246.7,229.5 232.9,229.5 205.7,135.3" fill="var(--text-color)"/>
                     </svg>
                 </div>
                 <div class="header-text">
@@ -622,10 +645,17 @@
                 <div class="brands-grid">
                     <a href="https://vision97.vision" target="_blank" class="brand-item">
                         <div class="brand-logo">
-                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Vision'97 Logo - Simple V shape -->
-                                <path d="M20,20 L50,80 L80,20" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
-                                <text x="35" y="65" font-size="12" fill="var(--accent-color)">97</text>
+                            <svg viewBox="0 0 300 300" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Vision'97 Logo -->
+                                <path d="M156.2,253.4c-1.4,0-3.4-0.5-6.1-1.6l-22.9-8.6c-1.1-0.5-1.6-1.2-1.6-2.2c0-1,0.5-1.8,1.6-2.1l69.3-25.7
+                                c1.2-0.5,2.2-0.5,3.2,0.1c1,0.6,1.5,1.4,1.5,2.5v10.5c0,1.2-0.6,2-1.7,2.6l-40.8,24.1C157.9,253.1,157,253.4,156.2,253.4z" fill="var(--text-color)"/>
+                                <path d="M143.5,110.5l-58.9,89.6c-0.8,1.2-1.8,1.8-3.2,1.8h-14.1c-1.6,0-2.7-0.8-3.2-2.3c-0.5-1.5-0.3-2.9,0.7-4.2l69.6-105.6
+                                c0.7-1.1,1.8-1.6,3.3-1.6h10.7c1.5,0,2.6,0.5,3.3,1.6l69.6,105.6c1,1.3,1.2,2.7,0.7,4.2c-0.5,1.5-1.6,2.3-3.2,2.3h-14.1
+                                c-1.3,0-2.4-0.6-3.2-1.8L143.5,110.5z" fill="var(--text-color)"/>
+                                <path d="M75.6,143.7c-1,0-1.7-0.6-1.7-1.7v-10.8c0-1.1,0.6-1.7,1.7-1.7h35.7c1.1,0,1.7,0.6,1.7,1.7V142c0,1.1-0.6,1.7-1.7,1.7
+                                H75.6z" fill="var(--text-color)"/>
+                                <path d="M190.4,143.7c-1,0-1.7-0.6-1.7-1.7v-10.8c0-1.1,0.6-1.7,1.7-1.7h35.7c1.1,0,1.7,0.6,1.7,1.7V142c0,1.1-0.6,1.7-1.7,1.7
+                                H190.4z" fill="var(--text-color)"/>
                             </svg>
                         </div>
                         <div class="brand-name">Vision'97</div>
@@ -638,10 +668,16 @@
                     </a>
                     <a href="https://curiogfxyard.work" target="_blank" class="brand-item">
                         <div class="brand-logo">
-                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
-                                <!-- CurioGfxYard Logo - C with a stylized G -->
-                                <path d="M30,25 C20,25 15,35 15,50 C15,65 20,75 30,75 C40,75 45,65 45,50" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
-                                <path d="M60,40 L85,40 M85,40 L70,60 M70,60 L85,60" stroke="var(--accent-color)" stroke-width="5" fill="none"/>
+                            <svg viewBox="0 0 334 300" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- CurioGfxYard Logo -->
+                                <path d="M53.6,137.4h31.5v35.3H53.6V137.4z" fill="var(--text-color)"/>
+                                <path d="M156.5,137.4c17.5,0,31.5,14.1,31.5,31.5v92.7c0,17.5-14.1,31.5-31.5,31.5h-54.6c-17.5,0-31.5-14.1-31.5-31.5v-24.2h29.4
+                                v21.7c0,1.9,0.8,3.7,2.1,5.1c1.4,1.4,3.2,2.1,5.1,2.1h43.7c4,0,7.2-3.2,7.2-7.2v-87.7c0-4-3.2-7.2-7.2-7.2h-48.9v26.3h24.2v26.9h-53.6
+                                v-46.2c0-17.5,14.1-31.5,31.5-31.5H156.5z" fill="var(--text-color)"/>
+                                <path d="M167.9,161.6c0-17.5,14.1-31.5,31.5-31.5h54.6c17.5,0,31.5,14.1,31.5,31.5v13.3H256v-10.8c0-1.9-0.8-3.7-2.1-5.1
+                                c-1.4-1.4-3.2-2.1-5.1-2.1h-43.7c-4,0,0,3.2,0,7.2v87.7c0,4,4,7.2,0,7.2h43.7c1.9,0,3.7-0.8,5.1-2.1c1.4-1.4,2.1-3.2,2.1-5.1v-10.8
+                                h29.4v13.3c0,17.5-14.1,31.5-31.5,31.5h-54.6c-17.5,0-31.5-14.1-31.5-31.5V161.6z" fill="var(--text-color)"/>
+                                <path d="M279.5,137.4H311v35.3h-31.5V137.4z" fill="var(--text-color)"/>
                             </svg>
                         </div>
                         <div class="brand-name">CurioGfxYard</div>
@@ -654,11 +690,17 @@
                     </a>
                     <a href="https://curiolabs.dev" target="_blank" class="brand-item">
                         <div class="brand-logo">
-                            <svg viewBox="0 0 100 100" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
-                                <!-- CurioLabs Logo - Lab flask with circular bubble -->
-                                <path d="M40,20 L40,50 L30,75 L70,75 L60,50 L60,20 Z" stroke="var(--accent-color)" stroke-width="3" fill="none"/>
-                                <circle cx="65" cy="35" r="10" stroke="var(--accent-color)" stroke-width="3" fill="none"/>
-                                <circle cx="65" cy="35" r="3" fill="var(--accent-color)"/>
+                            <svg viewBox="0 0 300 300" class="brand-svg" xmlns="http://www.w3.org/2000/svg">
+                                <!-- CurioLabs Logo -->
+                                <path d="M157.7,56.5c-0.2-0.1-0.4-0.2-0.7-0.2c-0.5,0-1,0.3-1.1,0.8l-29.6,75.8c-13,33.2-26,68.9-39,102.8
+                                c-0.1,0.3-0.1,0.7,0.1,1c0.2,0.3,0.5,0.5,0.9,0.5h173.8c0.4,0,0.7-0.2,0.9-0.5c0.2-0.3,0.2-0.7,0.1-1l-25.5-66.2l-44.7-112
+                                C162.3,56,159.9,57.5,157.7,56.5z" fill="var(--text-color)"/>
+                                <path d="M172.8,120.7h-30.4l-2.6,6.8c-1.1,3-4,4.9-7.3,4.9c-1.1,0-2.2-0.2-3.2-0.7c-1.9-0.8-3.4-2.3-4.1-4.3
+                                c-0.7-2-0.6-4.1,0.3-6c0.1-0.3,0.3-0.6,0.4-0.8l10.9-28.2c1.6-4.2,5.6-7,10.2-7h19.1c4.5,0,8.6,2.8,10.2,7l10.9,28.2
+                                c0.1,0.3,0.3,0.5,0.4,0.8c0.9,1.9,1,4,0.3,6c-0.7,2-2.2,3.5-4.1,4.3c-1,0.4-2.1,0.7-3.2,0.7c-3.2,0-6.1-1.9-7.3-4.9L172.8,120.7z" fill="var(--text-color)"/>
+                                <path d="M141.7,185.8c-13.9,0-25.2-11.3-25.2-25.2c0-13.9,11.3-25.2,25.2-25.2c13.9,0,25.2,11.3,25.2,25.2
+                                C166.9,174.5,155.6,185.8,141.7,185.8z M141.7,145.9c-8.1,0-14.7,6.6-14.7,14.7c0,8.1,6.6,14.7,14.7,14.7
+                                c8.1,0,14.7-6.6,14.7-14.7C156.4,152.5,149.8,145.9,141.7,145.9z" fill="var(--text-color)"/>
                             </svg>
                         </div>
                         <div class="brand-name">CurioLabs</div>
